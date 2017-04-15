@@ -7,11 +7,13 @@
   "author": "Matteo Contrini <m.contrini@gmail.com>",
   "license": "UNLICENSED",
   "dependencies": {
+    "async": "^2.3.0",
     "bole": "^3.0.2",
     "boom": "^4.3.1",
     "hapi": "^16.1.1",
     "inert": "^4.2.0",
     "joi": "^10.4.1",
+    "mongojs": "^2.4.0",
     "ws": "^2.2.2"
   },
   "devDependencies": {

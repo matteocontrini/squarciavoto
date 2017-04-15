@@ -39,7 +39,7 @@
 
 				// Listen for messages
 				socket.addEventListener('message', (event) => {
-				    this.log(event);
+				    this.log(event.data);
 				});
 			}
 		});
