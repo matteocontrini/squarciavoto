@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+	<div id="app">
+		<span v-html="logs"></span>
+	</div>
+	
+	<script>
+		window.vue = new Vue({
+			el: '#app',
+			data: {
+				logs: ''
+			},
+			methods: {
+				log(msg) {
+					this.logs += msg + '<br>';
+				}
+			},
+			created: function() {
+				// Create WebSocket connection.
+				var socket = new WebSocket('ws://localhost:8081');
+				
+				// Connection opened
+				socket.addEventListener('open', (event) => {
+				    this.log('Connected');
+				});
+				
+				socket.addEventListener('close', (event) => {
+					this.log('Connection closed, code ' + event.code);
+				});
+				
+				socket.addEventListener('error', (error) => {
+					this.log('Connection error');
+				});
+
+				// Listen for messages
+				socket.addEventListener('message', (event) => {
+				    this.log(event);
+				});
+			}
+		});
+	</script>
+</body>
+</html>
