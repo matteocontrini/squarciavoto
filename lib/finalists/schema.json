@@ -1,0 +1,18 @@
+{
+	"title": "finalists.json schema definition",
+	"type": "array",
+	"items": {
+		"type": "object",
+		"required": ["name", "code"],
+		"properties": {
+			"name": {
+				"type": "string",
+				"pattern": "^([A-Z]{1}[a-z]+ ){1,}([A-Z]{1}[a-z]+)$"
+			},
+			"code": {
+				"type": "string",
+				"pattern": "^([1-9]{1})|([1-9]{1}[0-9]{1})$"
+			}
+		}
+	}
+}
