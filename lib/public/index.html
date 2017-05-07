@@ -1,23 +1,124 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
-	<script src="https://unpkg.com/vue"></script>
+	<title>Squarcia</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="vue.js"></script>
+	<link rel="stylesheet" type="text/css" href="pure.css">
+	<link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body>
 	<div id="app">
-		<span v-html="logs"></span>
+		<div class="pure-g">
+			<div class="pure-u-1-3">
+				<table style="margin: 10px" class="pure-table pure-table-striped">
+					<thead>
+						<th>Time</th>
+						<th>Sender</th>
+						<th>Text</th>
+						<th>Parsed</th>
+					</thead>
+					<tbody>
+						<tr v-for="msg in messages">
+							<td>{{ msg.date | time }}</td>
+							<td>{{ msg.sender }}</td>
+							<td><code>{{ msg.text }}</code></td>
+							<td>{{ msg.vote | voteName }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="pure-u-1-3">
+				<div style="margin: 10px">
+					<table class="pure-table pure-table-bordered">
+						<tr>
+							<td>Total</td>
+							<td>{{ messages.length }}</td>
+						</tr>
+						<tr>
+							<td>Valid</td>
+							<td>{{ stats.validCount }} ({{ stats.validPercentage }})</td>
+						</tr>
+						<tr>
+							<td>Invalid</td>
+							<td>{{ stats.invalidCount }} ({{ stats.invalidPercentage }})</td>
+						</tr>
+						<tr>
+							<td>Senders</td>
+							<td>{{ stats.sendersCount }}</td>
+						</tr>
+						<tr>
+							<td>Avg votes</td>
+							<td></td>
+						</tr>
+					</table>
+					
+					<table style="margin-top: 10px" class="pure-table pure-table-striped">
+						<thead>
+							<th>Name</th>
+							<th>Count</th>
+							<th>%</th>
+						</thead>
+						<tbody>
+							<tr v-for="p in rank">
+								<td>{{ p.name }}</td>
+								<td>{{ p.count }}</td>
+								<td>{{ p.percentage }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="pure-u-1-3">
+				<div style="margin: 10px">
+					<div v-for="l in logs" v-html="l"></div>
+				</div>
+			</div>
+		</div>
 	</div>
 	
 	<script>
 		window.vue = new Vue({
 			el: '#app',
 			data: {
-				logs: ''
+				logs: [],
+				messages: [],
+				stats: {},
+				rank: []
 			},
 			methods: {
 				log(msg) {
-					this.logs += msg + '<br>';
+					if (typeof msg == 'object') {
+						msg = JSON.stringify(msg, null, 2);
+					}
+					
+					var out = '<pre>';
+					out += msg;
+					out += '</pre>';
+					out = out.replace(/\n/g, '<br>');
+					
+					if (this.logs.length > 20) {
+						this.logs.pop();
+					}
+					
+					this.logs.unshift(out);
+				}
+			},
+			filters: {
+				time: function(date) {
+					let d = new Date(date);
+					return d.getHours() + ':' + ('0' + d.getMinutes()).slice(-2);
+				},
+				voteName: function(vote) {
+					return (vote ? vote.name : '');
+				}
+			},
+			computed: {
+				countValid: function() {
+					return this.messages.filter((x) => !!x.vote).length;
+				},
+				countInvalid: function() {
+					return this.messages.length - this.countValid;
 				}
 			},
 			created: function() {
@@ -26,7 +127,9 @@
 				
 				// Connection opened
 				socket.addEventListener('open', (event) => {
-				    this.log('Connected');
+					this.log('Connected');
+					
+					socket.send('getallpls');
 				});
 				
 				socket.addEventListener('close', (event) => {
@@ -39,7 +142,16 @@
 
 				// Listen for messages
 				socket.addEventListener('message', (event) => {
-				    this.log(event.data);
+					var payload = JSON.parse(event.data);
+										
+					if (payload['type'] == 'messages') {
+						this.messages = payload['data'];
+						this.log(this.messages.length + ' messages');
+					}
+					else if (payload['type'] == 'message') {
+						this.messages.unshift(payload['data']);
+						this.log(payload);
+					}
 				});
 			}
 		});
