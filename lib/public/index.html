@@ -37,11 +37,11 @@
 						</tr>
 						<tr>
 							<td>Valid</td>
-							<td>{{ stats.validCount }} ({{ stats.validPercentage }})</td>
+							<td>{{ stats.validCount }} ({{ stats.validPercentage | fixed }})</td>
 						</tr>
 						<tr>
 							<td>Invalid</td>
-							<td>{{ stats.invalidCount }} ({{ stats.invalidPercentage }})</td>
+							<td>{{ stats.invalidCount }} ({{ stats.invalidPercentage | fixed }})</td>
 						</tr>
 						<tr>
 							<td>Senders</td>
@@ -111,6 +111,9 @@
 				},
 				voteName: function(vote) {
 					return (vote ? vote.name : '');
+				},
+				fixed: function(n) {
+					return (n ? n.toFixed(2) : '');
 				}
 			},
 			computed: {
@@ -150,6 +153,10 @@
 					}
 					else if (payload['type'] == 'message') {
 						this.messages.unshift(payload['data']);
+						this.log(payload);
+					}
+					else if (payload['type'] == 'stats') {
+						this.stats = payload['data'];
 						this.log(payload);
 					}
 				});
