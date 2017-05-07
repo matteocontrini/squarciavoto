@@ -57,12 +57,14 @@
 						<thead>
 							<th>Name</th>
 							<th>Count</th>
+							<th>Senders</th>
 							<th>%</th>
 						</thead>
 						<tbody>
 							<tr v-for="p in rank">
 								<td>{{ p.name }}</td>
 								<td>{{ p.count }}</td>
+								<td>{{ p.sendersCount }}</td>
 								<td>{{ p.percentage }}</td>
 							</tr>
 						</tbody>
@@ -157,6 +159,10 @@
 					}
 					else if (payload['type'] == 'stats') {
 						this.stats = payload['data'];
+						this.log(payload);
+					}
+					else if (payload['type'] == 'rank') {
+						this.rank = payload['data'];
 						this.log(payload);
 					}
 				});
