@@ -32,24 +32,24 @@
 				<div style="margin: 10px">
 					<table class="pure-table pure-table-bordered">
 						<tr>
-							<td>Total</td>
-							<td>{{ messages.length }}</td>
-						</tr>
-						<tr>
+							<td rowspan="2">Total</td>
+							<td rowspan="2">{{ messages.length }}</td>
 							<td>Valid</td>
-							<td>{{ stats.validCount }} ({{ stats.validPercentage | fixed }})</td>
+							<td>{{ stats.validCount }}</td>
+							<td>{{ stats.validPercentage | fixed }}</td>
 						</tr>
 						<tr>
 							<td>Invalid</td>
-							<td>{{ stats.invalidCount }} ({{ stats.invalidPercentage | fixed }})</td>
+							<td>{{ stats.invalidCount }}</td>
+							<td>{{ stats.invalidPercentage | fixed }}</td>
 						</tr>
 						<tr>
 							<td>Senders</td>
-							<td>{{ stats.sendersCount }}</td>
+							<td colspan="4">{{ stats.sendersCount }}</td>
 						</tr>
 						<tr>
 							<td>Avg votes</td>
-							<td></td>
+							<td colspan="4"></td>
 						</tr>
 					</table>
 					
@@ -65,7 +65,7 @@
 								<td>{{ p.name }}</td>
 								<td>{{ p.count }}</td>
 								<td>{{ p.sendersCount }}</td>
-								<td>{{ p.percentage }}</td>
+								<td>{{ p.percentage | fixed }}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -151,7 +151,7 @@
 										
 					if (payload['type'] == 'messages') {
 						this.messages = payload['data'];
-						this.log(this.messages.length + ' messages');
+						this.log(this.messages.length + ' SMS');
 					}
 					else if (payload['type'] == 'message') {
 						this.messages.unshift(payload['data']);
