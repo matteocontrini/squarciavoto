@@ -32,24 +32,36 @@
 				<div style="margin: 10px">
 					<table class="pure-table pure-table-bordered">
 						<tr>
-							<td rowspan="2">Total</td>
-							<td rowspan="2">{{ messages.length }}</td>
+							<td rowspan="4">Total</td>
+							<td rowspan="4">{{ messages.length }}</td>
+							<td>Parsed</td>
+							<td>{{ stats.parsedCount }}</td>
+							<td>{{ stats.parsedPercentage | fixed }}</td>
+							<td rowspan="2">% of total</td>
+						</tr>
+						<tr>
+							<td>Unparsable</td>
+							<td>{{ stats.unparsableCount }}</td>
+							<td>{{ stats.unparsablePercentage | fixed }}</td>
+						</tr>
+						<tr>
 							<td>Valid</td>
 							<td>{{ stats.validCount }}</td>
 							<td>{{ stats.validPercentage | fixed }}</td>
+							<td rowspan="2">% of parsed</td>
 						</tr>
 						<tr>
-							<td>Invalid</td>
-							<td>{{ stats.invalidCount }}</td>
-							<td>{{ stats.invalidPercentage | fixed }}</td>
+							<td>Exceeding</td>
+							<td>{{ stats.exceedingCount }}</td>
+							<td>{{ stats.exceedingPercentage | fixed }}</td>
 						</tr>
 						<tr>
 							<td>Senders</td>
-							<td colspan="4">{{ stats.sendersCount }}</td>
+							<td colspan="5">{{ stats.sendersCount }}</td>
 						</tr>
 						<tr>
 							<td>Avg votes</td>
-							<td colspan="4">{{ stats.averageVotes | fixed }}</td>
+							<td colspan="5">{{ stats.averageVotes | fixed }}</td>
 						</tr>
 					</table>
 					
