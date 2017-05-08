@@ -56,12 +56,17 @@
 							<td>{{ stats.exceedingPercentage | fixed }}</td>
 						</tr>
 						<tr>
-							<td>Senders</td>
-							<td colspan="5">{{ stats.sendersCount }}</td>
+							<td rowspan="2">Senders</td>
+							<td colspan="2">with votes</td>
+							<td colspan="3">{{ stats.sendersWithVotesCount }}</td>
 						</tr>
 						<tr>
-							<td>Avg votes</td>
-							<td colspan="5">{{ stats.averageVotes | fixed }}</td>
+							<td colspan="2">total</td>
+							<td colspan="3">{{ stats.sendersCount }}</td>
+						</tr>
+						<tr>
+							<td>Avg</td>
+							<td colspan="5">{{ stats.averageVotes | fixed }} votes per valid sender</td>
 						</tr>
 					</table>
 					
