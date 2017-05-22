@@ -132,7 +132,17 @@
 					return (vote ? vote.name : '');
 				},
 				fixed: function(n) {
-					return (n ? n.toFixed(2) : '');
+					if (typeof n != 'undefined') {
+						if (n.toFixed) {
+							return n.toFixed(2);
+						}
+						else {
+							return n;
+						}
+					}
+					else {
+						return '';
+					}
 				}
 			},
 			computed: {
