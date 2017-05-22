@@ -5,51 +5,51 @@
 	},
 	{
 		"name": "Santiago Flores",
-		"code": "2"
-	},
-	{
-		"name": "Lorenzo Montesano",
-		"code": "3"
-	},
-	{
-		"name": "Emma Conte",
 		"code": "4"
 	},
 	{
+		"name": "Lorenzo Montesano",
+		"code": "2"
+	},
+	{
+		"name": "Emma Conte",
+		"code": "3"
+	},
+	{
 		"name": "Valentina Torboli",
-		"code": "5"
-	},
-	{
-		"name": "Anselinda Grisenti",
-		"code": "6"
-	},
-	{
-		"name": "Mattia Serra",
-		"code": "16"
-	},
-	{
-		"name": "Yris Zocca",
-		"code": "7"
-	},
-	{
-		"name": "Chiara De Franco",
-		"code": "8"
-	},
-	{
-		"name": "Alessio Esposito",
 		"code": "9"
 	},
 	{
-		"name": "Sasha Ischia",
+		"name": "Anselinda Grisenti",
+		"code": "5"
+	},
+	{
+		"name": "Mattia Serra",
 		"code": "10"
 	},
 	{
-		"name": "Giorgia Berlanda",
+		"name": "Yris Zocca",
+		"code": "12"
+	},
+	{
+		"name": "Chiara De Franco",
 		"code": "11"
 	},
 	{
+		"name": "Alessio Esposito",
+		"code": "6"
+	},
+	{
+		"name": "Sasha Ischia",
+		"code": "7"
+	},
+	{
+		"name": "Giorgia Berlanda",
+		"code": "14"
+	},
+	{
 		"name": "Desiree Donegani",
-		"code": "12"
+		"code": "16"
 	},
 	{
 		"name": "Nicola Veronesi",
@@ -57,7 +57,7 @@
 	},
 	{
 		"name": "Aurora Bommartini",
-		"code": "14"
+		"code": "8"
 	},
 	{
 		"name": "Angelica Tappainer",
