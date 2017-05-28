@@ -126,13 +126,13 @@
 			filters: {
 				time: function(date) {
 					let d = new Date(date);
-					return d.getHours() + ':' + ('0' + d.getMinutes()).slice(-2);
+					return d.getHours() + ':' + ('0' + d.getMinutes()).slice(-2) + ':' + ('0' + d.getSeconds()).slice(-2);
 				},
 				voteName: function(vote) {
 					return (vote ? vote.name : '');
 				},
 				fixed: function(n) {
-					if (typeof n != 'undefined') {
+					if (n != null && typeof n != 'undefined') {
 						if (n.toFixed) {
 							return n.toFixed(2);
 						}
